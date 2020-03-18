@@ -2,16 +2,16 @@ const config = require('config')
 const express = require('express')
 const app = express()
 
+app.get('/', (req, res) => {
+    res.send('hello world')
+})
+
 const port = config.get('port')
-const server = app.listen(3000, () => {
+const server = app.listen(port, () => {
     console.log(`Now listening on ${port}`)
 })
 
 const io = require('socket.io')(server)
-
-app.get('/', (req, res) => {
-    res.send('hello world')
-})
 
 io.on('connection', socket => {
     socket.on('disconnect', () => {
